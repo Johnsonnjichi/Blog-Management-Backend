@@ -7,7 +7,7 @@ from .serializers import *
 from .serializers import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-# from django.contrib.auth.hashers import make_password
+
 
 # Signup route
 @api_view(['POST'])
@@ -31,8 +31,6 @@ def SignUp(request):
     print("Errors:", serializer.errors)  # Log the errors if validation fails
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Login route
-
 
 # Generate JWT Token
 def get_tokens_for_user(user):
@@ -41,6 +39,8 @@ def get_tokens_for_user(user):
         'refresh': str(refresh),
         'access': str(refresh.access_token),
     }
+
+# Login route
 
 @api_view(['POST'])
 def LogIn(request):
