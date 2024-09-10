@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from .serializers import *
 from .serializers import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import authenticate
 # from django.contrib.auth.hashers import make_password
 
 # Signup route
@@ -29,6 +30,28 @@ def SignUp(request):
 
     print("Errors:", serializer.errors)  # Log the errors if validation fails
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Login route
+
+
+# Generate JWT Token
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
+@api_view(['POST'])
+def LogIn(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    if username is None or password is None:
+        return Response({'error': 'Please provide both username and password'}, status=status.HTTP_400_BAD)
+    user = authenticate(username=username, password=password)
+    if not user:
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+    return Response(get_tokens_for_user(user), status=status.HTTP_200_OK)
 
 
 

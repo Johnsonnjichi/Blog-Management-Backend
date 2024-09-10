@@ -8,6 +8,7 @@ from .views import SignUp
 
 urlpatterns =[
     path('signup/', views.SignUp, name='signup'),
+    path('login/', views.LogIn, name='signup'),
     path('user', views.Home),
     path('', views.get_blog),
     path('post', views.create_blog),
