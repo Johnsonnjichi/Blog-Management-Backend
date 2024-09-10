@@ -7,8 +7,10 @@ from rest_framework_simplejwt.views import (
 from .views import SignUp
 
 urlpatterns =[
-    path('signup/', views.SignUp, name='signup'),
-    path('login/', views.LogIn, name='signup'),
+    # path('signup/', views.SignUp, name='signup'),
+    # path('login/', views.LogIn, name='login'),
+    path('login/', views.LogIn),
+    path('signup/', views.SignUp),
     path('user', views.Home),
     path('', views.get_blog),
     path('post', views.create_blog),
