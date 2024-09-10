@@ -4,6 +4,31 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import *
+from .serializers import UserSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+# from django.contrib.auth.hashers import make_password
+
+# Signup route
+@api_view(['POST'])
+def SignUp(request):
+    print("Received data:", request.data)  # Log the incoming data
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+
+        # Generate JWT token for the new user
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+
+        # Return the tokens in the response
+        return Response({
+            "message": "User created successfully",
+            "refresh": str(refresh),
+            "access": access_token
+        }, status=status.HTTP_201_CREATED)  # Ensure no trailing comma
+
+    print("Errors:", serializer.errors)  # Log the errors if validation fails
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
