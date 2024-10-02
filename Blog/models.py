@@ -12,7 +12,6 @@ class BlogPost(models.Model):
     # author = models.CharField(max_length=50)
 
     def __str__(self):
-        # return f'{self.title} - {self.author}'
         return self.title + '|' + self.author.username
-        # return self.title + '|' + str(self.author)
+
 

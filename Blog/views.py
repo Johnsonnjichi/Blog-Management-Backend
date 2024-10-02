@@ -9,7 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 
-
+#Authentication routes(Login, SignUp)
 # Signup route
 @api_view(['POST'])
 def SignUp(request):

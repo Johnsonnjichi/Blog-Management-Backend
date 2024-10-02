@@ -7,7 +7,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
     author_name = serializers.SerializerMethodField() 
     created_at = serializers.DateTimeField(format="%B %d, %Y %I:%M %p", read_only=True)
-    updated_at = serializers.DateTimeField(format="%B %d, %Y %I:%M %p", read_only=True)                                       #creating a field to show the authors username
+    updated_at = serializers.DateTimeField(format="%B %d, %Y %I:%M %p", read_only=True)                     
     class Meta:
         model = BlogPost
         fields = ['id', 'title', 'content', 'created_at', 'updated_at', 'author_name']       
