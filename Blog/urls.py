@@ -15,8 +15,4 @@ urlpatterns =[
     path('update/<int:id>', views.update_blog),
     path('delete/<int:id>', views.delete_blog),
  
-
-    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-      
 ]

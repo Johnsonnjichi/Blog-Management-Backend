@@ -9,8 +9,10 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # author = models.CharField(max_length=50)
 
     def __str__(self):
         # return f'{self.title} - {self.author}'
-        return self.title + '|' + str(self.author)
+        return self.title + '|' + self.author.username
+        # return self.title + '|' + str(self.author)
 
